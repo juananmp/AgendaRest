@@ -23,49 +23,15 @@ public class Marshall {
        
         
        
-        public void Marshall(Agenda agenda){
+        public void Marshall(AgendaObject agenda){
           try {
-            boolean correoCorrecto = false;
-            JAXBContext context = JAXBContext.newInstance(Agenda.class);
+            JAXBContext context = JAXBContext.newInstance(AgendaObject.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
-            PersonaObj p = new PersonaObj();
-
-            Scanner entrada = new Scanner(System.in);
-
-            String name = "";
-            String email = "";
-            int telephone = 0;
-
-            System.out.print("Ingrese su nombre: ");
-            name = entrada.nextLine();
-            
-              while (!correoCorrecto) {                  
-            
-            System.out.print("Ingrese su correo: ");
-            email = entrada.nextLine();
-            if(email.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")){
-                correoCorrecto = true;
-            }else{
-                System.out.println("Correo no correcto");
-            }
- }
-            System.out.print("Ingrese la numero de telefono: ");
-            telephone = entrada.nextInt();
-
-//            ArrayList<Persona> lista = new ArrayList<Persona>();
-
-            p.setName(name);
-            p.setEmail(email);
-            p.setTelephone(telephone);
             File XMLfile = new File("Agenda.xml");
-//            lista.add(p);
-//            Agenda.nuestraAgenda.setPersona(p);
-//            agendaObject.setPersonaObj(p);
-//            marshaller.marshal(Main.nuestraAgenda, XMLfile);
-//
-//            marshaller.marshal(Main.nuestraAgenda, System.out);
+            marshaller.marshal(agenda, XMLfile);
+
         } catch (JAXBException ex) {
             Logger.getLogger(Marshall.class.getName()).log(Level.SEVERE, null, ex);
         }

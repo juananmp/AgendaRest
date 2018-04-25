@@ -60,6 +60,14 @@ public class Persona {
       p.setName(name);
       p.setEmail(email);
       p.setTelephone(Integer.parseInt(telefono));
+      
+       UnMarshall u = new UnMarshall();
+       AgendaObject ao = u.UnMarshallAgenda();
+       ao.getPersonaObj().add(p);
+      Marshall m = new Marshall();
+      m.Marshall(ao);
+            
       return p;
+      
     }
 }
