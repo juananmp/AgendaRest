@@ -5,6 +5,7 @@
  */
 package Rest;
 
+import java.io.File;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -28,6 +29,7 @@ public class Agenda {
     /**
      * Creates a new instance of Agenda
      */
+    File agenda;
     public Agenda() {
     }
 

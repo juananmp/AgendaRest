@@ -31,6 +31,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(Rest.Agenda.class);
         resources.add(Rest.Persona.class);
+        resources.add(Rest.ValidarAgenda.class);
     }
     
 }
