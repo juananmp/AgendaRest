@@ -30,31 +30,34 @@ import org.xml.sax.SAXException;
  *
  * @author janto
  */
-@Path("ValidarAgenda")
-public class ValidarAgenda {
+@Path("ValidarPersona")
+public class ValidarPersona {
 
     @Context
     private UriInfo context;
- File file = new File("Agenda.xml");
+     File file = new File("Agenda.xml");
 
     File xsdFile = new File("ValidarAgenda.xsd");
+
     /**
-     * Creates a new instance of ValidarAgenda
+     * Creates a new instance of ValidarPersona
      */
-    public ValidarAgenda() {
+    public ValidarPersona() {
     }
 
     /**
-     * Retrieves representation of an instance of Rest.ValidarAgenda
+     * Retrieves representation of an instance of Rest.ValidarPersona
      * @return an instance of java.lang.String
      */
-   
+    
+    /**
+     * PUT method for updating or creating an instance of ValidarPersona
+     * @param content representation for the resource
+     */
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-    //POST  http://localhost:8080/AgendaRest/webresources/ValidarAgenda
-    //application-xml  application/xml
-        public String putXml() {
-       String txt = "Juanan";
+    public String putXml() {
+         String txt = "Juanan";
           File schemaFile = new File("ValidarAgenda.xsd");
         if(!schemaFile.exists()){
             CrearXsd.crear();
@@ -75,6 +78,4 @@ public class ValidarAgenda {
        return txt;
     }
     }
-    
-    
 

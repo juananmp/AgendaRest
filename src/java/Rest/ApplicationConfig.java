@@ -32,6 +32,7 @@ public class ApplicationConfig extends Application {
         resources.add(Rest.Agenda.class);
         resources.add(Rest.Persona.class);
         resources.add(Rest.ValidarAgenda.class);
+        resources.add(Rest.ValidarPersona.class);
     }
     
 }
