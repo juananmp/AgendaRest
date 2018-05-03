@@ -19,6 +19,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 import javax.xml.XMLConstants;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -35,7 +38,7 @@ public class ValidarPersona {
 
     @Context
     private UriInfo context;
-     File file = new File("Agenda.xml");
+  //   File file = new File("Agenda.xml");
 
     File xsdFile = new File("ValidarAgenda.xsd");
 
@@ -56,9 +59,15 @@ public class ValidarPersona {
      */
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-    public String putXml() {
+    public String putXml(PersonaObj p) throws JAXBException {
+        //Tambien si hago content-type application/xml y le paso una persona funciona
          String txt = "Juanan";
+         AgendaObject ao = new AgendaObject();
+         ao.getPersonaObj().add(p);
+          File fi = new File("filen.xml");
           File schemaFile = new File("ValidarAgenda.xsd");
+          JAXBContext jAXBcontext = JAXBContext.newInstance(AgendaObject.class);
+            Marshaller marshaller = jAXBcontext.createMarshaller();
         if(!schemaFile.exists()){
             CrearXsd.crear();
         }
@@ -66,11 +75,13 @@ public class ValidarPersona {
 
             SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             Schema schema = schemaFactory.newSchema(xsdFile);
+           
+            marshaller.marshal(ao, fi);
             Validator validator = schema.newValidator();
-            validator.validate(new StreamSource(file));
-            txt = (file + " is valid against the " + xsdFile + " Schema");
+            validator.validate(new StreamSource(fi));
+            txt = (fi + " is valid against HOLA the " + xsdFile + " Schema");
         } catch (SAXException ex) {
-            txt = (file + " is not valid against the " + xsdFile + " Schema");
+            txt = (fi + " is not valid against the " + xsdFile + " Schema");
             Logger.getLogger(ValidarAgenda.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(ValidarAgenda.class.getName()).log(Level.SEVERE, null, ex);
