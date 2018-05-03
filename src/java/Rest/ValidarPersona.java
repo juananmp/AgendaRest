@@ -79,7 +79,7 @@ public class ValidarPersona {
             marshaller.marshal(ao, fi);
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(fi));
-            txt = (fi + " is valid against HOLA the " + xsdFile + " Schema");
+            txt = (fi + " is valid against the " + xsdFile + " Schema");
         } catch (SAXException ex) {
             txt = (fi + " is not valid against the " + xsdFile + " Schema");
             Logger.getLogger(ValidarAgenda.class.getName()).log(Level.SEVERE, null, ex);

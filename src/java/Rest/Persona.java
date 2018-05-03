@@ -52,15 +52,10 @@ public class Persona {
      * @param content representation for the resource
      */
     @POST
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public PersonaObj postXml(@FormParam("nombre") String name,@FormParam("email") String email, @FormParam("telefono") String telefono){
+    @Consumes(MediaType.APPLICATION_XML)
+    public PersonaObj postXml(PersonaObj p){
       //Content-Type: application/x-www-form-urlencoded 
       //Body. nombre=juanan&email=juanan@gmailcom&telefono=62878855
-      PersonaObj p = new PersonaObj();
-      p.setName(name);
-      p.setEmail(email);
-      p.setTelephone(Integer.parseInt(telefono));
-      
        UnMarshall u = new UnMarshall();
        AgendaObject ao = u.UnMarshallAgenda();
        ao.getPersonaObj().add(p);
